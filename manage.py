@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from flask.ext.script import Manager, Server
 from main import app
 
