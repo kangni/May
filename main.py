@@ -3,6 +3,9 @@ from flask import Flask, render_template
 from config import DevConfig
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import func
+from flask_wtf import Form
+from wtforms import StringField, TextAreaField
+from wtforms.validators import DataRequired, Length
 
 app = Flask(__name__)
 app.config.from_object(DevConfig)
@@ -67,6 +70,14 @@ class Tag(db.Model):
 
     def __repr__(self):
         return "<Tag '{}'>".format(self.title)
+
+
+class CommentForm(Form):
+    name = StringField(
+        'Name',
+        validators=[DataRequired(), Length(max=225)]
+    )
+    text = TextAreaField(u'Comment', validators=[DataRequired()])
 
 
 def sidebar_data():
