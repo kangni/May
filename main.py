@@ -72,7 +72,7 @@ class Tag(db.Model):
 def sidebar_data():
     recent = Post.query.order_by(Post.publish_date.desc()).limit(5).all()
     top_tags = db.session.query(
-        Tag, func.count(tags.c.post_id).labal('total')
+        Tag, func.count(tags.c.post_id).label('total')
     ).join(tags).group_by(Tag).order_by('total DESC').limit(5).all()
 
     return recent, top_tags
@@ -87,7 +87,7 @@ def home(page=1):
     recent, top_tags = sidebar_data()
 
     return render_template(
-        'home.html',
+        'index.html',
         posts=posts,
         recent=recent,
         top_tags=top_tags
@@ -111,7 +111,7 @@ def post(post_id):
     )
 
 
-@app.route('tag/<string:tag_name>')
+@app.route('/tag/<string:tag_name>')
 def tag(tag_name):
     tag = Tag.query.filter_by(title=tag_name).first_or_404()
     posts = tag.posts.order_by(Post.publish_date.desc()).all()
@@ -126,7 +126,7 @@ def tag(tag_name):
     )
 
 
-@app.route('user/<string:username>')
+@app.route('/user/<string:username>')
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     posts = user.posts.order_by(Post.publish_date.desc()).all()
