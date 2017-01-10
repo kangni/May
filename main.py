@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 from flask import Flask, render_template
 from config import DevConfig
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -107,6 +108,17 @@ def home(page=1):
 
 @app.route('/post/<int:post_id>')
 def post(post_id):
+    form = CommentForm()
+    if form.validate_on_submit():
+        new_comment = Comment()
+        new_comment.name = form.name.data
+        new_comment.text = form.text.data
+        new_comment.post_id = post_id
+        new_comment.date = datetime.datetime.now()
+
+        db.session.add(new_comment)
+        db.session.commit()
+
     post = Post.query.get_or_404(post_id)
     tags = post.tags
     comments = post.comments.order_by(Comment.date.desc()).all()
@@ -118,7 +130,8 @@ def post(post_id):
         tags=tags,
         comments=comments,
         recent=recent,
-        top_tags=top_tags
+        top_tags=top_tags,
+        form=form
     )
 
 
