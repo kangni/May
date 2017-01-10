@@ -42,7 +42,8 @@ class Post(db.Model):
     text = db.Column(db.Text())
     publish_date = db.Column(db.DateTime())
     user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
-    tags = db.relationship('Tag', secondary=tags, backref='posts')
+    tags = db.relationship('Tag', secondary=tags, backref=db.backref('posts', lazy='dynamic'))
+    comments = db.relationship('Comment', backref='post', lazy='dynamic')
 
     def __init__(self, title):
         self.title = title
