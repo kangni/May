@@ -4,7 +4,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config(object):
-    pass
+    SECRET_KEY = 'ef6ed3c476c45eb39931abb50c2b40b4%'
 
 
 class ProdConfig(Config):
