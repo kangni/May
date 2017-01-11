@@ -21,7 +21,7 @@ tags = db.Table(
 blog_blueprint = Blueprint(
     'blog',
     __name__,
-    template_folder='template/blog',
+    template_folder='templates/blog',
     url_prefix="/blog"
 )
 
@@ -96,6 +96,11 @@ def sidebar_data():
     ).join(tags).group_by(Tag).order_by('total DESC').limit(5).all()
 
     return recent, top_tags
+
+
+@app.route('/')
+def index():
+    return redirect(url_for('blog.home'))
 
 
 @blog_blueprint.route('/')
