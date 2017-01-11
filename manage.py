@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
+import os
 from flask.ext.script import Manager, Server
-from main import app, db, User, Post, Tag, Comment
+from May.models import db, User, Post, Tag, Comment
+from May import create_app
 from flask.ext.migrate import Migrate, MigrateCommand
+
+env = os.environ.get('MAY_ENV', 'dev')
+app = create_app('May.config.%sConfig' % env.capitalize())
 
 migrate = Migrate(app, db)
 

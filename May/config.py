@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import os
-basedir = os.path.abspath(os.path.dirname(__file__))
+#import os
+#basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config(object):
@@ -15,4 +15,5 @@ class DevConfig(Config):
     DEBUG = True
     #SQLALCHEMY_ECHO = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///../data-dev.sqlite'
+
