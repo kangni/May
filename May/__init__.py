@@ -4,6 +4,7 @@ from flask import Flask
 from models import db
 from controllers.main import main_blueprint
 from controllers.blog import blog_blueprint
+from May.extensions import bcrypt
 
 
 def create_app(object_name):
@@ -11,6 +12,7 @@ def create_app(object_name):
     app.config.from_object(object_name)
 
     db.init_app(app)
+    bcrypt.init_app(app)
 
     app.register_blueprint(main_blueprint)
     app.register_blueprint(blog_blueprint)
