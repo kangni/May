@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-#import os
-#basedir = os.path.abspath(os.path.dirname(__file__))
+# import os
+# basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config(object):
@@ -13,7 +13,7 @@ class ProdConfig(Config):
 
 class DevConfig(Config):
     DEBUG = True
-    #SQLALCHEMY_ECHO = True
+    # SQLALCHEMY_ECHO = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///../data-dev.sqlite'
 
