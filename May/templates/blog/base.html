@@ -47,7 +47,7 @@
     <p>Who am I？</p>
   </div>
 
-  {% with messages = get_flashed_messages(with_categoried=true) %}
+  {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
       {% for category, message in messages %}
         <div class="alert alert-{{ category }} alert-dismissible" role="alert">
