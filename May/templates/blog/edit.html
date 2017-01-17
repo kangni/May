@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
-{% block title %}
-  Post Creation
-{% endblock %}
+{% block title %}Post Creation{% endblock %}
 {% block body %}
   <div class="row">
     <h1 class="text-center">Edit {{ post.title }}</h1>
@@ -24,7 +22,7 @@
             <p class="help-block">{{ e }}</p>
           {% endfor %}
         {% endif %}
-        {{ form.title(id="editor", class_='form-control') }}
+        {{ form.text(id="editor", class_='form-control') }}
       </div>
       <input class="btn btn-primary" type="submit" value="Submit">
     </form>
@@ -32,8 +30,8 @@
 {% endblock %}
 
 {% block js %}
-<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
-<script>
-    CKEDITOR.replace('editor')
-</script>
+  <script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
+  <script>
+      CKEDITOR.replace('editor');
+  </script>
 {% endblock %}

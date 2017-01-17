@@ -9,7 +9,7 @@ from May.models import User
 class CommentForm(Form):
     name = StringField(
         'Name',
-        validators=[DataRequired(), Length(max=225)]
+        validators=[DataRequired(), Length(max=255)]
     )
     text = TextAreaField(u'Comment', validators=[DataRequired()])
 
@@ -42,11 +42,17 @@ class LoginForm(Form):
         return True
 
 
+class OpenIDForm(Form):
+    openid = StringField('OpenID URL', [DataRequired(), URL()])
+
+
 class RegisterForm(Form):
     username = StringField('Username', [DataRequired(), Length(max=255)])
     password = PasswordField('Password', [DataRequired(), Length(min=8)])
-    confirm = PasswordField('Confirm', [DataRequired(), EqualTo('password')])
-
+    confirm = PasswordField('Confirm Password', [
+        DataRequired(),
+        EqualTo('password')
+    ])
     recaptcha = RecaptchaField()
 
     def validate(self):
@@ -58,7 +64,7 @@ class RegisterForm(Form):
         user = User.query.filter_by(username=self.username.data).first()
 
         if user:
-            self.username.errors.append("User with that name already in use.")
+            self.username.errors.append("User with that name already exists")
             return False
 
         return True
